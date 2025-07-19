@@ -1,5 +1,0 @@
-torch-model-archiver --model-name simple_linear --version 1.0 --serialized-file model.pth --handler model_handler.py --model-file models/linear.py --export-path model-store --force --extra-files models/linear.py,models/__init__.py --force
-
-torchserve --start --model-store model-store --ts-config config/config.properties --disable-token-auth --models simple_linear=model_store/simple_linear.mar
-
-Pip install PyYaml

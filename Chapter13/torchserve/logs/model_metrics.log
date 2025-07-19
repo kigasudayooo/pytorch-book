@@ -1,4 +1,0 @@
-2024-11-16T08:30:54,739 - HandlerTime.ms:22.06|#ModelName:simple_linear,Level:Model|#hostname:Macmini.hsd1.wa.comcast.net,requestID:460f63dc-145f-41a2-bdef-225f6e31d885,timestamp:1731774654
-2024-11-16T08:30:54,741 - PredictionTime.ms:22.45|#ModelName:simple_linear,Level:Model|#hostname:Macmini.hsd1.wa.comcast.net,requestID:460f63dc-145f-41a2-bdef-225f6e31d885,timestamp:1731774654
-2024-11-16T08:54:34,985 - HandlerTime.ms:20.47|#ModelName:simple_linear,Level:Model|#hostname:Macmini.hsd1.wa.comcast.net,requestID:9d483c4d-bf71-4d2c-be00-01668aa711e7,timestamp:1731776074
-2024-11-16T08:54:34,986 - PredictionTime.ms:20.78|#ModelName:simple_linear,Level:Model|#hostname:Macmini.hsd1.wa.comcast.net,requestID:9d483c4d-bf71-4d2c-be00-01668aa711e7,timestamp:1731776074
