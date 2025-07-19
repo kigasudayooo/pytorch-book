@@ -34,10 +34,9 @@ venv.bak/
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
 
-# PyTorch
+# PyTorch models
 *.pth
 *.pt
-model.pth
 *.ckpt
 
 # IDE
@@ -47,14 +46,11 @@ model.pth
 *.swo
 *~
 
-# OS
+# macOS
 .DS_Store
-.DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
-ehthumbs.db
-Thumbs.db
 
 # Logs
 *.log
@@ -68,16 +64,13 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 
-# Data files
+# Data directories (Chapter data)
+contents/*/data/
+**/data/
+
+# Large data files
 *.csv
-*.json
-*.txt
 *.dat
-*.pdf
-*.png
-*.jpg
-*.jpeg
-*.gif
 
 # TorchServe
 model-store/
