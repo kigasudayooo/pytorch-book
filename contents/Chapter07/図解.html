@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RNNとLSTMの構造図</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .diagram-section {
+            margin-bottom: 50px;
+            padding: 25px;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #495057;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        
+        .diagram-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        svg {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .explanation {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+            margin-top: 20px;
+        }
+        
+        .explanation h3 {
+            color: #495057;
+            margin-top: 0;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .comparison-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-item h4 {
+            color: #007bff;
+            margin-top: 0;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .feature-list li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .interactive-button {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+        }
+        
+        .interactive-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,123,255,0.4);
+        }
+        
+        .animation-controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        
+        .animated {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧠 RNNとLSTMの構造図</h1>
+        
+        <!-- RNN構造図 -->
+        <div class="diagram-section">
+            <h2 class="section-title">1. RNN (Recurrent Neural Network) の構造</h2>
+            
+            <div class="diagram-container">
+                <svg width="800" height="400" viewBox="0 0 800 400">
+                    <!-- 背景グラデーション -->
+                    <defs>
+                        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#e3f2fd;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#bbdefb;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#2196f3;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#1976d2;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <rect width="800" height="400" fill="url(#bgGradient)" rx="10"/>
+                    
+                    <!-- 時間ステップのRNNセル -->
+                    <g id="rnn-t0">
+                        <circle cx="150" cy="200" r="30" fill="url(#nodeGradient)" stroke="#0d47a1" stroke-width="2"/>
+                        <text x="150" y="205" text-anchor="middle" fill="white" font-weight="bold" font-size="14">RNN</text>
+                        <text x="150" y="260" text-anchor="middle" fill="#333" font-size="12">t=0</text>
+                    </g>
+                    
+                    <g id="rnn-t1">
+                        <circle cx="300" cy="200" r="30" fill="url(#nodeGradient)" stroke="#0d47a1" stroke-width="2"/>
+                        <text x="300" y="205" text-anchor="middle" fill="white" font-weight="bold" font-size="14">RNN</text>
+                        <text x="300" y="260" text-anchor="middle" fill="#333" font-size="12">t=1</text>
+                    </g>
+                    
+                    <g id="rnn-t2">
+                        <circle cx="450" cy="200" r="30" fill="url(#nodeGradient)" stroke="#0d47a1" stroke-width="2"/>
+                        <text x="450" y="205" text-anchor="middle" fill="white" font-weight="bold" font-size="14">RNN</text>
+                        <text x="450" y="260" text-anchor="middle" fill="#333" font-size="12">t=2</text>
+                    </g>
+                    
+                    <g id="rnn-t3">
+                        <circle cx="600" cy="200" r="30" fill="url(#nodeGradient)" stroke="#0d47a1" stroke-width="2"/>
+                        <text x="600" y="205" text-anchor="middle" fill="white" font-weight="bold" font-size="14">RNN</text>
+                        <text x="600" y="260" text-anchor="middle" fill="#333" font-size="12">t=3</text>
+                    </g>
+                    
+                    <!-- 入力 -->
+                    <rect x="130" y="320" width="40" height="25" fill="#4caf50" rx="5"/>
+                    <text x="150" y="336" text-anchor="middle" fill="white" font-size="12">x₀</text>
+                    
+                    <rect x="280" y="320" width="40" height="25" fill="#4caf50" rx="5"/>
+                    <text x="300" y="336" text-anchor="middle" fill="white" font-size="12">x₁</text>
+                    
+                    <rect x="430" y="320" width="40" height="25" fill="#4caf50" rx="5"/>
+                    <text x="450" y="336" text-anchor="middle" fill="white" font-size="12">x₂</text>
+                    
+                    <rect x="580" y="320" width="40" height="25" fill="#4caf50" rx="5"/>
+                    <text x="600" y="336" text-anchor="middle" fill="white" font-size="12">x₃</text>
+                    
+                    <!-- 出力 -->
+                    <rect x="130" y="80" width="40" height="25" fill="#ff9800" rx="5"/>
+                    <text x="150" y="96" text-anchor="middle" fill="white" font-size="12">y₀</text>
+                    
+                    <rect x="280" y="80" width="40" height="25" fill="#ff9800" rx="5"/>
+                    <text x="300" y="96" text-anchor="middle" fill="white" font-size="12">y₁</text>
+                    
+                    <rect x="430" y="80" width="40" height="25" fill="#ff9800" rx="5"/>
+                    <text x="450" y="96" text-anchor="middle" fill="white" font-size="12">y₂</text>
+                    
+                    <rect x="580" y="80" width="40" height="25" fill="#ff9800" rx="5"/>
+                    <text x="600" y="96" text-anchor="middle" fill="white" font-size="12">y₃</text>
+                    
+                    <!-- 入力矢印 -->
+                    <path d="M 150 320 L 150 230" stroke="#4caf50" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 300 320 L 300 230" stroke="#4caf50" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 450 320 L 450 230" stroke="#4caf50" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 600 320 L 600 230" stroke="#4caf50" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                    
+                    <!-- 出力矢印 -->
+                    <path d="M 150 170 L 150 105" stroke="#ff9800" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 300 170 L 300 105" stroke="#ff9800" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 450 170 L 450 105" stroke="#ff9800" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 600 170 L 600 105" stroke="#ff9800" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                    
+                    <!-- 隠れ状態の矢印 -->
+                    <path d="M 180 200 L 270 200" stroke="#e91e63" stroke-width="4" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 330 200 L 420 200" stroke="#e91e63" stroke-width="4" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 480 200 L 570 200" stroke="#e91e63" stroke-width="4" fill="none" marker-end="url(#arrowhead)"/>
+                    
+                    <!-- 隠れ状態ラベル -->
+                    <text x="225" y="190" text-anchor="middle" fill="#e91e63" font-size="12" font-weight="bold">h₀</text>
+                    <text x="375" y="190" text-anchor="middle" fill="#e91e63" font-size="12" font-weight="bold">h₁</text>
+                    <text x="525" y="190" text-anchor="middle" fill="#e91e63" font-size="12" font-weight="bold">h₂</text>
+                    
+                    <!-- 矢印マーカー -->
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="currentColor"/>
+                        </marker>
+                    </defs>
+                    
+                    <!-- タイトル -->
+                    <text x="400" y="30" text-anchor="middle" fill="#2c3e50" font-size="18" font-weight="bold">RNN: 隠れ状態による記憶の伝播</text>
+                </svg>
+            </div>
+            
+            <div class="explanation">
+                <h3>🔍 RNNの特徴</h3>
+                <ul class="feature-list">
+                    <li><strong>隠れ状態</strong>：前の時間ステップの情報を次に伝達</li>
+                    <li><strong>単純な構造</strong>：一つの隠れ状態で全ての記憶を管理</li>
+                    <li><strong>勾配消失問題</strong>：長いシーケンスで初期の情報が薄れる</li>
+                    <li><strong>計算効率</strong>：シンプルで高速だが表現力に限界</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- LSTM構造図 -->
+        <div class="diagram-section">
+            <h2 class="section-title">2. LSTM (Long Short-Term Memory) の構造</h2>
+            
+            <div class="diagram-container">
+                <svg width="900" height="500" viewBox="0 0 900 500">
+                    <defs>
+                        <linearGradient id="lstmBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#fff3e0;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ffe0b2;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="cellGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#9c27b0;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#7b1fa2;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="gateGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ff5722;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#d84315;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    
+                    <rect width="900" height="500" fill="url(#lstmBg)" rx="10"/>
+                    
+                    <!-- LSTMセル全体 -->
+                    <rect x="250" y="150" width="400" height="200" fill="none" stroke="#7b1fa2" stroke-width="3" rx="15" stroke-dasharray="5,5"/>
+                    <text x="450" y="140" text-anchor="middle" fill="#7b1fa2" font-size="16" font-weight="bold">LSTM Cell</text>
+                    
+                    <!-- セル状態の線 -->
+                    <path d="M 50 200 L 850 200" stroke="#9c27b0" stroke-width="6" fill="none"/>
+                    <text x="450" y="180" text-anchor="middle" fill="#9c27b0" font-size="14" font-weight="bold">Cell State (長期記憶)</text>
+                    
+                    <!-- 忘却ゲート -->
+                    <circle cx="300" cy="280" r="25" fill="url(#gateGradient)" stroke="#d84315" stroke-width="2"/>
+                    <text x="300" y="285" text-anchor="middle" fill="white" font-size="12" font-weight="bold">σ</text>
+                    <text x="300" y="320" text-anchor="middle" fill="#d84315" font-size="12" font-weight="bold">忘却ゲート</text>
+                    
+                    <!-- 入力ゲート -->
+                    <circle cx="400" cy="280" r="25" fill="url(#gateGradient)" stroke="#d84315" stroke-width="2"/>
+                    <text x="400" y="285" text-anchor="middle" fill="white" font-size="12" font-weight="bold">σ</text>
+                    <text x="400" y="320" text-anchor="middle" fill="#d84315" font-size="12" font-weight="bold">入力ゲート</text>
+                    
+                    <!-- セル候補 -->
+                    <circle cx="450" cy="280" r="25" fill="#607d8b" stroke="#455a64" stroke-width="2"/>
+                    <text x="450" y="285" text-anchor="middle" fill="white" font-size="12" font-weight="bold">tanh</text>
+                    <text x="450" y="320" text-anchor="middle" fill="#455a64" font-size="12" font-weight="bold">セル候補</text>
+                    
+                    <!-- 出力ゲート -->
+                    <circle cx="550" cy="280" r="25" fill="url(#gateGradient)" stroke="#d84315" stroke-width="2"/>
+                    <text x="550" y="285" text-anchor="middle" fill="white" font-size="12" font-weight="bold">σ</text>
+                    <text x="550" y="320" text-anchor="middle" fill="#d84315" font-size="12" font-weight="bold">出力ゲート</text>
+                    
+                    <!-- 掛け算ノード -->
+                    <circle cx="350" cy="200" r="15" fill="#4caf50" stroke="#388e3c" stroke-width="2"/>
+                    <text x="350" y="205" text-anchor="middle" fill="white" font-size="12" font-weight="bold">×</text>
+                    
+                    <circle cx="500" cy="200" r="15" fill="#4caf50" stroke="#388e3c" stroke-width="2"/>
+                    <text x="500" y="205" text-anchor="middle" fill="white" font-size="12" font-weight="bold">×</text>
+                    
+                    <!-- 足し算ノード -->
+                    <circle cx="450" cy="200" r="15" fill="#2196f3" stroke="#1976d2" stroke-width="2"/>
+                    <text x="450" y="205" text-anchor="middle" fill="white" font-size="12" font-weight="bold">+</text>
+                    
+                    <!-- 入力 -->
+                    <rect x="180" y="380" width="40" height="25" fill="#4caf50" rx="5"/>
+                    <text x="200" y="396" text-anchor="middle" fill="white" font-size="12">x_t</text>
+                    
+                    <!-- 前の隠れ状態 -->
+                    <rect x="80" y="280" width="40" height="25" fill="#ff9800" rx="5"/>
+                    <text x="100" y="296" text-anchor="middle" fill="white" font-size="12">h_{t-1}</text>
+                    
+                    <!-- 出力 -->
+                    <rect x="720" y="280" width="40" height="25" fill="#ff9800" rx="5"/>
+                    <text x="740" y="296" text-anchor="middle" fill="white" font-size="12">h_t</text>
+                    
+                    <!-- 接続線 -->
+                    <!-- 入力から各ゲートへ -->
+                    <path d="M 200 380 L 200 350 L 300 350 L 300 305" stroke="#4caf50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 200 350 L 400 350 L 400 305" stroke="#4caf50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 200 350 L 450 350 L 450 305" stroke="#4caf50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 200 350 L 550 350 L 550 305" stroke="#4caf50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                    
+                    <!-- 前の隠れ状態から各ゲートへ -->
+                    <path d="M 120 292 L 275 292" stroke="#ff9800" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 120 292 L 200 292 L 200 340 L 400 340 L 400 305" stroke="#ff9800" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 200 340 L 450 340 L 450 305" stroke="#ff9800" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 200 340 L 550 340 L 550 305" stroke="#ff9800" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                    
+                    <!-- ゲートからセル状態への接続 -->
+                    <path d="M 300 255 L 300 220 L 350 220 L 350 215" stroke="#d84315" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 400 255 L 400 230 L 485 230 L 485 215" stroke="#d84315" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 450 255 L 450 230 L 485 230" stroke="#607d8b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                    
+                    <!-- セル状態から出力への接続 -->
+                    <path d="M 515 200 L 600 200 L 600 280 L 720 280" stroke="#9c27b0" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                    <path d="M 550 255 L 550 240 L 600 240 L 600 280" stroke="#d84315" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                    
+                    <!-- タイトル -->
+                    <text x="450" y="30" text-anchor="middle" fill="#2c3e50" font-size="18" font-weight="bold">LSTM: ゲート機構による選択的記憶管理</text>
+                    
+                    <!-- 凡例 -->
+                    <g transform="translate(50, 50)">
+                        <rect x="0" y="0" width="200" height="80" fill="white" stroke="#ccc" rx="5"/>
+                        <text x="10" y="15" fill="#333" font-size="12" font-weight="bold">凡例</text>
+                        <circle cx="20" cy="30" r="8" fill="url(#gateGradient)"/>
+                        <text x="35" y="35" fill="#333" font-size="10">シグモイドゲート</text>
+                        <circle cx="20" cy="45" r="8" fill="#607d8b"/>
+                        <text x="35" y="50" fill="#333" font-size="10">tanh活性化</text>
+                        <circle cx="20" cy="60" r="8" fill="#4caf50"/>
+                        <text x="35" y="65" fill="#333" font-size="10">演算ノード</text>
+                    </g>
+                </svg>
+            </div>
+            
+            <div class="explanation">
+                <h3>🔍 LSTMの特徴</h3>
+                <ul class="feature-list">
+                    <li><strong>セル状態</strong>：長期記憶を安定して保持</li>
+                    <li><strong>忘却ゲート</strong>：不要な記憶を選択的に削除</li>
+                    <li><strong>入力ゲート</strong>：新しい情報を選択的に記憶</li>
+                    <li><strong>出力ゲート</strong>：必要な情報のみを出力</li>
+                    <li><strong>勾配消失問題の解決</strong>：長期依存性を効果的に学習</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 比較セクション -->
+        <div class="diagram-section">
+            <h2 class="section-title">3. RNN vs LSTM 詳細比較</h2>
+            
+            <div class="comparison">
+                <div class="comparison-item">
+                    <h4>🔵 RNN (Recurrent Neural Network)</h4>
+                    <ul class="feature-list">
+                        <li>シンプルな構造で理解しやすい</li>
+                        <li>計算効率が良い</li>
+                        <li>短期的な依存関係に適している</li>
+                        <li>勾配消失問題により長期記憶が困難</li>
+                        <li>パラメータ数が少ない</li>
+                    </ul>
+                    
+                    <h4 style="color: #dc3545; margin-top: 20px;">主な課題</h4>
+                    <p style="background: #f8d7da; padding: 10px; border-radius: 5px; border-left: 4px solid #dc3545;">
+                        長いシーケンスで初期の情報が失われる「勾配消失問題」
+                    </p>
+                </div>
+                
+                <div class="comparison-item">
+                    <h4>🟣 LSTM (Long Short-Term Memory)</h4>
+                    <ul class="feature-list">
+                        <li>長期・短期記憶を分離管理</li>
+                        <li>ゲート機構による選択的記憶</li>
+                        <li>勾配消失問題を効果的に解決</li>
+                        <li>複雑な言語パターンを学習可能</li>
+                        <li>高い表現力と性能</li>
+                    </ul>
+                    
+                    <h4 style="color: #28a745; margin-top: 20px;">主な利点</h4>
+                    <p style="background: #d4edda; padding: 10px; border-radius: 5px; border-left: 4px solid #28a745;">
+                        ゲート機構により「何を覚え、何を忘れ、何を出力するか」を学習
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- インタラクティブ要素 -->
+        <div class="diagram-section">
+            <h2 class="section-title">4. インタラクティブデモ</h2>
+            
+            <div class="animation-controls">
+                <button class="interactive-button" onclick="animateRNN()">🔵 RNN動作を見る</button>
+                <button class="interactive-button" onclick="animateLSTM()">🟣 LSTM動作を見る</button>
+                <button class="interactive-button" onclick="resetAnimation()">🔄 リセット</button>
+            </div>
+            
+            <div id="demo-explanation" style="text-align: center; margin-top: 20px; padding: 20px; background: #e3f2fd; border-radius: 10px;">
+                <p>上のボタンをクリックして、RNNとLSTMの動作の違いを視覚的に確認してみましょう！</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function animateRNN() {
+            // RNNの動作アニメーション
+            const rnnElements = document.querySelectorAll('#rnn-t0, #rnn-t1, #rnn-t2, #rnn-t3');
+            const explanation = document.getElementById('demo-explanation');
+            
+            explanation.innerHTML = `
+                <h3 style="color: #1976d2;">🔵 RNN動作中...</h3>
+                <p>情報が時間ステップごとに順次伝播し、徐々に初期の情報が薄れていく様子を確認できます。</p>
+            `;
+            
+            rnnElements.forEach((element, index) => {
+                setTimeout(()
